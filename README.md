@@ -21,14 +21,81 @@ For the paystack api reference, see [v1](https://developers.paystack.co/referenc
 ### Usage
 
 #### Basic
-import the entry file and create a instace of Paystack
+import the entry file and create a instance of Paystack with your api key as parameter.
 
 ```ts
+
 // import entry file
 import Paystack from "../index"
 
 const { KEY } = process.env;
+
+const paystack = new Paystack(KEY);
+
+```
+#### Initialize a transaction - supports callbacks & async/await
+Method - initialize
+```
+Parameters - options {object}
+
+options = {
+  email
+  amount
+  reference
+}
+
+response = {
+  status: string,
+  message: string,
+  data: {
+    authorization_url: string,
+    access_code: string,
+    reference: string
+  }
+}
+
 ```
 
-const paystack = new Paystack();
+##### Async/await
+```ts
+try {
 
+  const response = await paystack.initialize({ options });
+  
+} catch(err) {
+  // handle error
+}
+
+```
+
+#### Verify a transaction
+
+Method - verify
+```
+parameters = transaction reference
+
+response = {
+  status: boolean
+  message: string
+  data: {
+    amount: number,
+    currency: string,
+    transaction_date: string,
+    status: string,
+    reference: string,
+    gateway_response: string,
+    channel: string,
+    plan: string,
+    requested_amount: string
+  }
+```
+
+```ts
+try {
+
+  const response = await paystack.verify(trans_ref);
+  
+} catch(err) {
+  // handle error
+}
+```
