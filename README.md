@@ -16,6 +16,7 @@ For the paystack api reference, see [v1](https://developers.paystack.co/referenc
 
 ### Installation (npm package coming soon)
 `$ git clone https://github.com/sheghun/paystack2.git`
+
 `$ npm install || yarn add`
 
 ### Usage
@@ -33,6 +34,7 @@ const { KEY } = process.env;
 const paystack = new Paystack(KEY);
 
 ```
+#### TRANSACTIONS API
 #### Initialize a transaction - supports native promises & ES6 async/await
 Method - initialize
 ```
