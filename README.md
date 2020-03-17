@@ -33,7 +33,7 @@ const { KEY } = process.env;
 const paystack = new Paystack(KEY);
 
 ```
-#### Initialize a transaction - supports callbacks & async/await
+#### Initialize a transaction - supports native promises & ES6 async/await
 Method - initialize
 ```
 Parameters - options {object}
@@ -60,7 +60,7 @@ response = {
 ```ts
 try {
 
-  const response = await paystack.initialize({ options });
+  const response = await paystack.transaction.initialize({ options });
   
 } catch(err) {
   // handle error
@@ -93,9 +93,58 @@ response = {
 ```ts
 try {
 
-  const response = await paystack.verify(trans_ref);
+  const response = await paystack.transaction.verify(trans_ref);
   
 } catch(err) {
   // handle error
 }
+
+```
+#### List transactions
+Method - list
+```
+response = {
+  status: string,
+  message: string,
+  data: [
+    {
+      id: number,
+      domain: string,
+      status: string,
+      reference: string,
+      amount: number,
+      message: null,
+      gateway_response: string,
+      paid_at: null,
+      created_at: string,
+      channel: string,
+      currency: string,
+      customer: {
+        first_name: string,
+        last_name: string,
+        email: string,
+        phone: string,
+        metadata: null,
+        customer_code: string
+      },
+      authorization: {},
+      plan: {},
+      requested_amount: number
+      
+    }
+  ]
+}
+
+```
+
+```ts
+
+try {
+
+  const response = await paystack.transaction.list();
+  
+} catch(err) {
+  // handle error
+}
+
 ```
